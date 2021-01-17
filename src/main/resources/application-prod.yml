@@ -1,0 +1,42 @@
+# 服务器相关的配置
+server:
+  # 服务开启的端口
+  port: 8080
+
+# 服务器打印日志相关的配置
+logging:
+  # 日志打印等级
+  level:
+    root: INFO
+
+# Spring 相关的配置
+spring:
+  # 数据源
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Mysql的链接相关配置
+    druid:
+      url: jdbc:mysql://localhost:3306/cooking_master_backend?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT
+      username: root
+      password: 123456.aA
+  # Servlet的相关配置
+  servlet:
+    multipart:
+      # 允许的的最大文件大小
+      max-file-size: 1000MB
+      # 允许的最大请求大小
+      max-request-size: 1000MB
+
+# ORM持久化的配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: dsa
+
+# 文件的存储路径
+leonardo:
+  filepath:
+    image: /opt/Cooking-Backend/resource/image/
+    video: /opt/Cooking-Backend/resource/video/
