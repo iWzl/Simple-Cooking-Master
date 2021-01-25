@@ -2,6 +2,14 @@ package com.quarks.cooking.pojo.rsp;
 
 import lombok.Data;
 
+
+/**
+ * DishesRsp
+ *
+ * @author Inspiration S.P.A Leo
+ * @date create time 2020-12-13 13:43
+ **/
+
 @Data
 public class DishesRsp {
     private Integer did;

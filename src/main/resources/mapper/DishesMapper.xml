@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quarks.cooking.mapper.DishesDao">
+
+    <select id="fetchDailyRecommendDishesList" resultType="com.quarks.cooking.pojo.bean.Dishes">
+        select did, `group`, type, time, name, image, description, material, chef_id, top, course_id, refresh_time
+        from dishes
+        where top > 0
+        order by top desc
+    </select>
+
+    <select id="fetchSearchDishesList" resultType="com.quarks.cooking.pojo.bean.Dishes">
+        select did, `group`, type, time, name, image, description, material, chef_id, top, course_id, refresh_time
+        from dishes
+        <where>
+            <if test="group != null and group != ''">
+                `group` = #{group}
+            </if>
+            <if test="time != null and time != ''">
+               and  `time` = #{time}
+            </if>
+            <if test="type != null and type != ''">
+                and `type` = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="fetchChefAccountProfileByUid" resultType="com.quarks.cooking.pojo.bean.Account">
+        select uid, account, name, gender, about_me, avatar, status, create_time, update_time from chefs where uid = #{uid}
+    </select>
+
+    <select id="fetchPageOfDishesByDishName" resultType="com.quarks.cooking.pojo.bean.Dishes">
+        select did, `group`, type, time, name, image, description, material, chef_id, top, course_id, refresh_time
+        from dishes
+        <where>
+            <if test="dishName != null and dishName != ''">
+                name like concat('%',#{dishName},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="fetchCourseDetailByCourseId" resultType="com.quarks.cooking.pojo.bean.Course">
+        select cid, name, image, description, chef_id, type, refresh_time
+        from course
+        where cid = #{courseId}
+    </select>
+
+    <select id="fetchCurriculumDetailByCourseId" resultType="com.quarks.cooking.pojo.bean.Curriculum">
+        select id, name, cid, url, description, `index`, refresh_time
+        from curriculum where cid = #{courseId}
+        order by `index`
+    </select>
+</mapper>
