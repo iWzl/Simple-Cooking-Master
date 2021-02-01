@@ -1,7 +1,6 @@
 package com.quarks.cooking.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.pagehelper.PageInfo;
 import com.quarks.cooking.pojo.bean.Moment;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Account
+ * Moments
  *
  * @author Inspiration S.P.A Leo
  * @date create time 2020-12-12 16:52
