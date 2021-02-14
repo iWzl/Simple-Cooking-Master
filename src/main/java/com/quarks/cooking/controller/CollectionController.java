@@ -86,6 +86,9 @@ public class CollectionController {
         }else if(CollectType.ATTENTION.name().equals(type)){
             collectionQueryWrapper.eq("type", type.trim().toUpperCase())
                     .eq("data",HttpUtil.getUid());
+        }else if(CollectType.FOLLOW.name().equals(type)){
+            collectionQueryWrapper.eq("type", type.trim().toUpperCase())
+                    .eq("uid",HttpUtil.getUid());
         }else {
             return Msg.buildFailedMsg("collection type failed [COLLECT,ATTENTION,FOLLOW]");
         }
