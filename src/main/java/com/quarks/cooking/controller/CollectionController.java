@@ -78,19 +78,15 @@ public class CollectionController {
 
     @Security(RoleEnum.LOGIN)
     @GetMapping(value = "count",consumes = MediaType.ALL_VALUE)
-    public Msg<SelfCollectNumberRsp> fetchChefFollowNumber(@Validated @NotBlank() @RequestParam("type") String type){
+    public Msg<SelfCollectNumberRsp> fetchChefFollowNumber(@Validated @NotBlank() @RequestParam("type") String type,
+                                                           @RequestParam(value = "reverse",defaultValue = "false") boolean reverse){
         QueryWrapper<Collection> collectionQueryWrapper = new QueryWrapper<>();
-        if(CollectType.COLLECT.name().equalsIgnoreCase(type)){
-            collectionQueryWrapper.eq("type", type.trim().toUpperCase())
-                    .eq("uid",HttpUtil.getUid());
-        }else if(CollectType.ATTENTION.name().equals(type)){
+        if(reverse){
             collectionQueryWrapper.eq("type", type.trim().toUpperCase())
                     .eq("data",HttpUtil.getUid());
-        }else if(CollectType.FOLLOW.name().equals(type)){
+        }else {
             collectionQueryWrapper.eq("type", type.trim().toUpperCase())
                     .eq("uid",HttpUtil.getUid());
-        }else {
-            return Msg.buildFailedMsg("collection type failed [COLLECT,ATTENTION,FOLLOW]");
         }
         int count = collectionService.count(collectionQueryWrapper);
         SelfCollectNumberRsp selfCollectNumberRsp = new SelfCollectNumberRsp();

@@ -24,6 +24,7 @@ public class GoodsCourseRsp implements HttpResponse {
         private String description;
         private ProfileRsp chefProfile;
         private String type;
+        private Double price;
         private Long refreshTime;
     }
 

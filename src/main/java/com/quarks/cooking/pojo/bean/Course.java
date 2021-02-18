@@ -14,6 +14,7 @@ public class Course {
     private String description;
     private Integer chefId;
     private String type;
+    private Double price;
     private Long refreshTime;
 
     public Integer getCid() {
@@ -70,5 +71,13 @@ public class Course {
 
     public void setRefreshTime(Long refreshTime) {
         this.refreshTime = refreshTime;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

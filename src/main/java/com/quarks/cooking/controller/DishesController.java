@@ -49,9 +49,9 @@ public class DishesController {
 
     @GetMapping(value = "/filter")
     @Security(RoleEnum.LOGIN)
-    public Msg<PageOfInfoListRsp<DishesRsp>> fetchPageOfSearchDishesList(@RequestParam String group,
-                                                                         @RequestParam String type,
-                                                                         @RequestParam String time,
+    public Msg<PageOfInfoListRsp<DishesRsp>> fetchPageOfSearchDishesList(@RequestParam(value = "group",defaultValue = "") String group,
+                                                                         @RequestParam(value = "type",defaultValue = "") String type,
+                                                                         @RequestParam(value = "time",defaultValue = "") String time,
                                                                          @Validated @Min(1) @RequestParam(defaultValue = "1") Integer pageNo,
                                                                          @Validated @Min(1) @Max(100) @RequestParam(defaultValue = "10") Integer pageSize){
         PageOfInfoListRsp<DishesRsp> pageOfInfoListRsp = dishesService.fetchPageOfSearchDishesList(group,type,time,pageNo,pageSize);

@@ -52,7 +52,7 @@
     </select>
 
     <select id="fetchCourseGoodsByChefId" resultType="com.quarks.cooking.pojo.bean.Course">
-        select cid, name, image, description, chef_id, type, refresh_time
+        select cid, name, image, description, chef_id, type, price,refresh_time
         from course
         where chef_id = #{chefId}
         and type = 1;

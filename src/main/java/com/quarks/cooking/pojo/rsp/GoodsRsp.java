@@ -3,7 +3,10 @@ package com.quarks.cooking.pojo.rsp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.quarks.cooking.pojo.common.HttpResponse;
+import com.quarks.cooking.utils.JsonConvertUtil;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Goods
@@ -53,4 +56,8 @@ public class GoodsRsp implements HttpResponse {
      * 状态
      */
     private Integer status;
+
+    public List<String> getImages() {
+        return JsonConvertUtil.valueOfList(images,String.class);
+    }
 }
