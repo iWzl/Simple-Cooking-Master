@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quarks.cooking.mapper.GoodsDao">
+
+    <select id="fetchGoodsByType" resultType="com.quarks.cooking.pojo.bean.Goods">
+        select gid, type, name, brief, poster, images, price, status
+        from goods
+        where type = #{type}
+    </select>
+
+    <select id="fetchAllBanner" resultType="com.quarks.cooking.pojo.bean.Banner">
+        select bid, title, image, type, jump, status
+        from banner
+    </select>
+</mapper>

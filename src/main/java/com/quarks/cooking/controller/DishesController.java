@@ -52,8 +52,8 @@ public class DishesController {
     public Msg<PageOfInfoListRsp<DishesRsp>> fetchPageOfSearchDishesList(@RequestParam String group,
                                                                          @RequestParam String type,
                                                                          @RequestParam String time,
-                                                                         @Validated @Min(1) @RequestParam Integer pageNo,
-                                                                         @Validated @Min(1) @Max(100) @RequestParam Integer pageSize){
+                                                                         @Validated @Min(1) @RequestParam(defaultValue = "1") Integer pageNo,
+                                                                         @Validated @Min(1) @Max(100) @RequestParam(defaultValue = "10") Integer pageSize){
         PageOfInfoListRsp<DishesRsp> pageOfInfoListRsp = dishesService.fetchPageOfSearchDishesList(group,type,time,pageNo,pageSize);
         return Msg.buildSuccessMsg(pageOfInfoListRsp);
     }
