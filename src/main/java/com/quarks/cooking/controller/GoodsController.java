@@ -5,7 +5,9 @@ import com.quarks.cooking.pojo.common.Msg;
 import com.quarks.cooking.pojo.common.PageOfInfoListRsp;
 import com.quarks.cooking.pojo.common.RoleEnum;
 import com.quarks.cooking.pojo.rsp.BannerRsp;
+import com.quarks.cooking.pojo.rsp.GoodsCourseRsp;
 import com.quarks.cooking.pojo.rsp.GoodsRsp;
+import com.quarks.cooking.service.DishesService;
 import com.quarks.cooking.service.GoodsService;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -30,9 +32,11 @@ import javax.validation.constraints.Min;
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class GoodsController {
     private final GoodsService goodsService;
+    private final DishesService dishesService;
 
-    public GoodsController(GoodsService goodsService) {
+    public GoodsController(GoodsService goodsService, DishesService dishesService) {
         this.goodsService = goodsService;
+        this.dishesService = dishesService;
     }
 
     @Security(RoleEnum.LOGIN)
@@ -43,6 +47,14 @@ public class GoodsController {
         PageOfInfoListRsp<GoodsRsp> pageOfInfoListRsp =  goodsService.fetchPageOfGoodsByType(type,pageNo,pageSize);
         return Msg.buildSuccessMsg(pageOfInfoListRsp);
     }
+
+    @Security(RoleEnum.LOGIN)
+    @GetMapping(value = "course",consumes = MediaType.ALL_VALUE)
+    public Msg<GoodsCourseRsp> fetchCourseGoodsByChefId(@Validated @RequestParam("chefId") Integer chefId){
+        GoodsCourseRsp goodsCourseRsp = dishesService.fetchCourseGoodsByChefId(chefId);
+        return Msg.buildSuccessMsg(goodsCourseRsp);
+    }
+
 
     @Security(RoleEnum.LOGIN)
     @GetMapping(value = "/banner",consumes = MediaType.ALL_VALUE)

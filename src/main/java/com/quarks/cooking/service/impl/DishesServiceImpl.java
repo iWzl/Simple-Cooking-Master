@@ -11,12 +11,14 @@ import com.quarks.cooking.pojo.bean.Dishes;
 import com.quarks.cooking.pojo.common.PageOfInfoListRsp;
 import com.quarks.cooking.pojo.rsp.CourseRsp;
 import com.quarks.cooking.pojo.rsp.DishesRsp;
+import com.quarks.cooking.pojo.rsp.GoodsCourseRsp;
 import com.quarks.cooking.pojo.rsp.ProfileRsp;
 import com.quarks.cooking.service.DishesService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -81,6 +83,20 @@ public class DishesServiceImpl extends ServiceImpl<DishesDao, Dishes> implements
             BeanUtils.copyProperties(curriculum,curriculumRsp);
             courseRsp.getCurriculumRspList().add(curriculumRsp);
         }
+        return courseRsp;
+    }
+
+    @Override
+    public GoodsCourseRsp fetchCourseGoodsByChefId(Integer chefId) {
+        List<Course> courseList = dishesDao.fetchCourseGoodsByChefId(chefId);
+        List<GoodsCourseRsp.Course> courseRspList = new ArrayList<>();
+        for (Course course : courseList) {
+            GoodsCourseRsp.Course courseRsp = new GoodsCourseRsp.Course();
+            BeanUtils.copyProperties(course,courseRsp);
+            courseRspList.add(courseRsp);
+        }
+        GoodsCourseRsp courseRsp  = new GoodsCourseRsp();
+        courseRsp.setCourseList(courseRspList);
         return courseRsp;
     }
 

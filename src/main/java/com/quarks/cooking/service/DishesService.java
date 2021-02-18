@@ -5,6 +5,7 @@ import com.quarks.cooking.pojo.bean.Dishes;
 import com.quarks.cooking.pojo.common.PageOfInfoListRsp;
 import com.quarks.cooking.pojo.rsp.CourseRsp;
 import com.quarks.cooking.pojo.rsp.DishesRsp;
+import com.quarks.cooking.pojo.rsp.GoodsCourseRsp;
 
 /**
  * DishesService
@@ -21,4 +22,6 @@ public interface DishesService extends IService<Dishes> {
     PageOfInfoListRsp<DishesRsp> fetchPageOfDishesByDishName(String dishName, Integer pageNo, Integer pageSize);
 
     CourseRsp fetchCourseDetailByCourseId(Integer courseId);
+
+    GoodsCourseRsp fetchCourseGoodsByChefId(Integer chefId);
 }

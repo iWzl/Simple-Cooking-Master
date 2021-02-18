@@ -29,5 +29,9 @@ public interface DishesDao extends BaseMapper<Dishes> {
 
     Course fetchCourseDetailByCourseId(@Param("courseId") Integer courseId);
 
+    List<Course> fetchCourseGoodsByChefId(@Param("chefId") Integer chefId);
+
+
     List<Curriculum> fetchCurriculumDetailByCourseId(@Param("courseId") Integer courseId);
+
 }

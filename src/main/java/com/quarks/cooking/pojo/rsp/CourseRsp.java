@@ -1,5 +1,6 @@
 package com.quarks.cooking.pojo.rsp;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.quarks.cooking.pojo.common.HttpResponse;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CourseRsp implements HttpResponse {
     private ProfileRsp chefProfile;
     private String type;
     private Long refreshTime;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CurriculumRsp> curriculumRspList;
 
     public Integer getCid() {
