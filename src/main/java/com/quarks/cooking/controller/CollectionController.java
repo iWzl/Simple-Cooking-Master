@@ -79,14 +79,16 @@ public class CollectionController {
     @Security(RoleEnum.LOGIN)
     @GetMapping(value = "count",consumes = MediaType.ALL_VALUE)
     public Msg<SelfCollectNumberRsp> fetchChefFollowNumber(@Validated @NotBlank() @RequestParam("type") String type,
-                                                           @RequestParam(value = "reverse",defaultValue = "false") boolean reverse){
+                                                           @RequestParam(value = "reverse",defaultValue = "false") boolean reverse,
+                                                           @RequestParam(value = "uid",required = false) Long uid){
         QueryWrapper<Collection> collectionQueryWrapper = new QueryWrapper<>();
+        uid = (null == uid || uid == 0) ?  HttpUtil.getUid() : uid;
         if(reverse){
             collectionQueryWrapper.eq("type", type.trim().toUpperCase())
-                    .eq("data",HttpUtil.getUid());
+                    .eq("data",uid);
         }else {
             collectionQueryWrapper.eq("type", type.trim().toUpperCase())
-                    .eq("uid",HttpUtil.getUid());
+                    .eq("uid",uid);
         }
         int count = collectionService.count(collectionQueryWrapper);
         SelfCollectNumberRsp selfCollectNumberRsp = new SelfCollectNumberRsp();
