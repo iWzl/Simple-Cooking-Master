@@ -8,9 +8,10 @@ import com.quarks.cooking.pojo.common.RoleEnum;
 import com.quarks.cooking.pojo.req.AccountLoginReq;
 import com.quarks.cooking.pojo.req.AccountRegisterReq;
 import com.quarks.cooking.pojo.req.RefreshProfileReq;
-import com.quarks.cooking.pojo.rsp.ProfileRsp;
 import com.quarks.cooking.pojo.rsp.AccountLoginRsp;
+import com.quarks.cooking.pojo.rsp.ProfileRsp;
 import com.quarks.cooking.service.AccountService;
+import com.quarks.cooking.service.DishesService;
 import com.quarks.cooking.utils.HttpUtil;
 import com.quarks.cooking.utils.JWTUtil;
 import com.quarks.cooking.utils.ObjectUtil;
@@ -32,9 +33,11 @@ import org.springframework.web.bind.annotation.*;
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
     private final AccountService accountService;
+    private final DishesService dishesService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, DishesService dishesService) {
         this.accountService = accountService;
+        this.dishesService = dishesService;
     }
 
     @PostMapping(value = "login",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -85,6 +88,13 @@ public class AccountController {
         }
         ProfileRsp profileRsp = new ProfileRsp();
         BeanUtils.copyProperties(account,profileRsp);
+        return Msg.buildSuccessMsg(profileRsp);
+    }
+
+    @GetMapping(value = "chef")
+    @Security(RoleEnum.LOGIN)
+    public Msg<ProfileRsp> fetchChefProfile(@Validated @RequestParam("chefId")Integer chefId){
+        ProfileRsp profileRsp = dishesService.fetchChefProfile(chefId);
         return Msg.buildSuccessMsg(profileRsp);
     }
 

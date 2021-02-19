@@ -16,4 +16,6 @@ public interface GoodsService extends IService<Goods> {
     PageOfInfoListRsp<GoodsRsp> fetchPageOfGoodsByType(String type, Integer pageNo, Integer pageSize);
 
     BannerRsp fetchAllBanner();
+
+    GoodsRsp fetchOneOfGoodsByGoodsId(Long goodsId);
 }

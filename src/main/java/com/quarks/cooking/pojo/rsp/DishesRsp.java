@@ -1,5 +1,6 @@
 package com.quarks.cooking.pojo.rsp;
 
+import com.quarks.cooking.pojo.common.HttpResponse;
 import lombok.Data;
 
 
@@ -11,7 +12,7 @@ import lombok.Data;
  **/
 
 @Data
-public class DishesRsp {
+public class DishesRsp implements HttpResponse {
     private Integer did;
 
     private String group;

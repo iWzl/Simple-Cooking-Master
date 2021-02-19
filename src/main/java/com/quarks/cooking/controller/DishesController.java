@@ -67,6 +67,13 @@ public class DishesController {
         return Msg.buildSuccessMsg(pageOfInfoListRsp);
     }
 
+    @GetMapping(value = "/one")
+    @Security(RoleEnum.LOGIN)
+    public Msg<DishesRsp> fetchOneOfDishesDishesId(@NotBlank @RequestParam("id") Long dishesId){
+        DishesRsp dishesRsp = dishesService.fetchOneOfDishesDishesId(dishesId);
+        return Msg.buildSuccessMsg(dishesRsp);
+    }
+
     @GetMapping(value = "/course")
     @Security(RoleEnum.LOGIN)
     public Msg<CourseRsp> fetchCourseDetailByCourseId(@NotBlank @RequestParam Integer courseId){

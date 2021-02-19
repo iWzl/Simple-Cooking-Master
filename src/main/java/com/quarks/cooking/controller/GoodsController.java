@@ -49,7 +49,15 @@ public class GoodsController {
     }
 
     @Security(RoleEnum.LOGIN)
-    @GetMapping(value = "course",consumes = MediaType.ALL_VALUE)
+    @GetMapping(value = "/one",consumes = MediaType.ALL_VALUE)
+    public Msg<GoodsRsp> fetchOneOfGoodsByGoodsId(@Validated @RequestParam("id") Long goodsId){
+        GoodsRsp goodsRsp =  goodsService.fetchOneOfGoodsByGoodsId(goodsId);
+        return Msg.buildSuccessMsg(goodsRsp);
+    }
+
+
+    @Security(RoleEnum.LOGIN)
+    @GetMapping(value = "/course",consumes = MediaType.ALL_VALUE)
     public Msg<GoodsCourseRsp> fetchCourseGoodsByChefId(@Validated @RequestParam("chefId") Integer chefId){
         GoodsCourseRsp goodsCourseRsp = dishesService.fetchCourseGoodsByChefId(chefId);
         return Msg.buildSuccessMsg(goodsCourseRsp);

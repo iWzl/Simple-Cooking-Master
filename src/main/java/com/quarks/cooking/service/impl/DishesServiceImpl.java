@@ -71,6 +71,20 @@ public class DishesServiceImpl extends ServiceImpl<DishesDao, Dishes> implements
     }
 
     @Override
+    public DishesRsp fetchOneOfDishesDishesId(Long dishesId) {
+        Dishes dishes = dishesDao.selectById(dishesId);
+        DishesRsp dishesRsp = new DishesRsp();
+        BeanUtils.copyProperties(dishes,dishesRsp);
+        dishesRsp.setChefProfile(fetchChefProfileByUin(dishes.getChefId()));
+        return dishesRsp;
+    }
+
+    @Override
+    public ProfileRsp fetchChefProfile(Integer chefId) {
+        return fetchChefProfileByUin(chefId);
+    }
+
+    @Override
     public CourseRsp fetchCourseDetailByCourseId(Integer courseId) {
         CourseRsp courseRsp =new CourseRsp();
         Course course = dishesDao.fetchCourseDetailByCourseId(courseId);

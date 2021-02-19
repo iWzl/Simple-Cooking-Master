@@ -44,4 +44,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, Goods> implements Go
         List<Banner> bannerList = goodsDao.fetchAllBanner();
         return new BannerRsp(bannerList);
     }
+
+    @Override
+    public GoodsRsp fetchOneOfGoodsByGoodsId(Long goodsId) {
+        Goods goods = goodsDao.selectById(goodsId);
+        GoodsRsp goodsRsp = new GoodsRsp();
+        BeanUtils.copyProperties(goods,goodsRsp);
+        return goodsRsp;
+    }
 }
