@@ -72,7 +72,7 @@ public class DishesServiceImpl extends ServiceImpl<DishesDao, Dishes> implements
 
     @Override
     public DishesRsp fetchOneOfDishesDishesId(Long dishesId) {
-        Dishes dishes = dishesDao.selectById(dishesId);
+        Dishes dishes = dishesDao.selectDishesById(dishesId);
         DishesRsp dishesRsp = new DishesRsp();
         BeanUtils.copyProperties(dishes,dishesRsp);
         dishesRsp.setChefProfile(fetchChefProfileByUin(dishes.getChefId()));

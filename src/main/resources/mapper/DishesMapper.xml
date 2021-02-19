@@ -57,4 +57,9 @@
         where chef_id = #{chefId}
         and type = 1;
     </select>
+
+    <select id="selectDishesById" resultType="com.quarks.cooking.pojo.bean.Dishes">
+        select did, `group`, type, time, name, image, description, material, chef_id, top, course_id, refresh_time
+        from dishes where did = #{dishesId}
+    </select>
 </mapper>
